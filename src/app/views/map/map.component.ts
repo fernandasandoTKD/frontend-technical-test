@@ -55,10 +55,8 @@ export class MapComponent implements AfterViewInit {
 
     L.marker(this.startPoint).addTo(this.map).bindPopup('Punto de inicio').openPopup();
     L.marker(this.endPoint).addTo(this.map).bindPopup('Punto final');
+    this.distanceKm = this.haversineDistance(this.startPoint, this.endPoint);
   }
-
-
-
 
 
 
