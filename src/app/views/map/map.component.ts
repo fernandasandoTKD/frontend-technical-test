@@ -36,15 +36,15 @@ export class MapComponent implements AfterViewInit {
     let L: any;
     try {
       const leaflet = await import('leaflet');
-      console.log('🚀 Leaflet importado:', leaflet); // 👉 Agregar log para depurar
-      L = leaflet.default ?? leaflet; // ✅ Asegurar que L se asigne correctamente
+      console.log('Leaflet importado:', leaflet);
+      L = leaflet.default ?? leaflet;
     } catch (error) {
-      console.error('🚨 Error al importar Leaflet:', error);
+      console.error('Error al importar Leaflet:', error);
       return;
     }
 
     if (!L || !L.map) {
-      console.error('🚨 Leaflet no se cargó correctamente en producción:', L);
+      console.error('Leaflet no se cargó correctamente en producción:', L);
       return;
     }
 
