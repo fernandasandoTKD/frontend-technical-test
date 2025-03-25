@@ -38,6 +38,7 @@ export class MapComponent implements AfterViewInit {
       const leaflet = await import('leaflet');
       const routing = await import('leaflet-routing-machine');
       L = leaflet; // Asigna correctamente Leaflet
+      console.log('✅ Leaflet cargado correctamente:', L);
     } catch (error) {
       console.error('Error al importar Leaflet:', error);
       return;
@@ -47,6 +48,16 @@ export class MapComponent implements AfterViewInit {
     if (!mapElement) {
       console.error("Error: No se encontró el elemento con id 'map'.");
       return;
+    }
+
+    console.log('Punto de inicio:', this.startPoint);
+    console.log('Punto final:', this.endPoint);
+
+    if (!Array.isArray(this.startPoint)) {
+      console.error('Error: this.startPoint no es un array en producción.', this.startPoint);
+    }
+    if (!Array.isArray(this.endPoint)) {
+      console.error('Error: this.endPoint no es un array en producción.', this.endPoint);
     }
 
     this.map = L.map('map').setView(this.startPoint, 13);
@@ -60,6 +71,7 @@ export class MapComponent implements AfterViewInit {
 
     this.distanceKm = this.haversineDistance(this.startPoint, this.endPoint);
   }
+
 
 
 
