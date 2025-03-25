@@ -29,48 +29,38 @@ export class MapComponent implements AfterViewInit {
    */
   async ngAfterViewInit(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) {
-      // Solo ejecuta código si está en un navegador
+      console.warn('El mapa no se renderiza en SSR.');
       return;
     }
 
-    //Importación dinámicas de liberías
     let L: any;
     try {
-      // Importación de forma Leaflet y Routing Machine de forma asíncrona
-      L = await import('leaflet');
-      await import('leaflet-routing-machine');
+      const leaflet = await import('leaflet');
+      const routing = await import('leaflet-routing-machine');
+      L = leaflet; // Asigna correctamente Leaflet
     } catch (error) {
-      console.error(" Error al importar Leaflet:", error);
+      console.error('Error al importar Leaflet:', error);
       return;
     }
 
-
-    //Validadión de elemento mapa
     const mapElement = document.getElementById('map');
     if (!mapElement) {
       console.error("Error: No se encontró el elemento con id 'map'.");
       return;
     }
 
-
-    // Se iniciliza el mapa con coordinadas de inicio y zoom
     this.map = L.map('map').setView(this.startPoint, 13);
 
-
-    // títulos de   OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+      attribution: '&copy; OpenStreetMap contributors',
     }).addTo(this.map);
 
-    // Marcadores de inicio y de fin
     L.marker(this.startPoint).addTo(this.map).bindPopup('Punto de inicio').openPopup();
     L.marker(this.endPoint).addTo(this.map).bindPopup('Punto final');
 
-
-    // Llamado de función haversineDistance para calcular distancia
     this.distanceKm = this.haversineDistance(this.startPoint, this.endPoint);
-
   }
+
 
 
 
