@@ -1,0 +1,54 @@
+<mat-toolbar class="flex justify-between items-center px-4 !bg-emerald-600">
+
+  <div class="flex items-center gap-2">
+    <!-- Botón hamburguesa solo visible en pantallas pequeñas -->
+   <div class="lg:hidden">
+    <button mat-icon-button (click)="isVisible = !isVisible" >
+      <mat-icon>menu</mat-icon>
+    </button>
+   </div>
+    <a [routerLink]="" class="font-semibold no-underline text-white text-lg">
+      Prueba técnica Angular
+    </a>
+  </div>
+
+  <!--Menú solo en pantallas grandes -->
+  <div class="hidden lg:flex gap-2 items-center">
+    @for (menu of menus; track menu) {
+      <button mat-button [routerLink]="menu.link" class="text-white font-medium">
+        {{ menu.name }}
+      </button>
+    }
+
+    <!-- Botón de ayuda -->
+    <button mat-icon-button matTooltip="Ayuda">
+      <a target="_blank" style="text-decoration: none; color: inherit;">
+        <mat-icon>help_outline</mat-icon>
+      </a>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- idebar para móviles -->
+@if (isVisible) {
+  <div class="fixed right-0 left-[0.25rem] top-1 bottom-1 p-1 w-[250px] overflow-y-auto bg-white shadow-lg z-50 text-center lg:hidden">
+    <div class="flex justify-end">
+      <button mat-icon-button (click)="isVisible = false" color="primary">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    @for (menu of menus; track menu) {
+      <div class="w-full">
+        <button
+          class="w-full mt-1 mb-[0.24rem] text-start font-bold"
+          mat-button
+          color="primary"
+          [routerLink]="menu.link"
+          (click)="isVisible = false"
+        >
+          {{ menu.name }}
+        </button>
+      </div>
+    }
+  </div>
+}

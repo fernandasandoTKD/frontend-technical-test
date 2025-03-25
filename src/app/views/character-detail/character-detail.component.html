@@ -1,0 +1,51 @@
+<div class="flex justify-center my-5 ">
+  @if(character){
+    <div class="flex flex-col h-auto bg-neutral-800 text-white p-6 gap-6 rounded-2xl mx-3">
+
+      <div class="text-center">
+        <h1 class="text-3xl font-bold">{{ character.name }}</h1>
+        <hr class="border-gray-500 my-4">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4 text-xl">
+
+        <div class="flex justify-center">
+          <div class="w-48 h-48 max-w-full max-h-full">
+            <img [src]="character.image" [alt]="character.name" class="w-full h-full rounded-lg object-cover">
+          </div>
+        </div>
+
+        <div>
+          <p> <strong>ID:</strong> {{ character.id }}</p>
+
+          <p><strong>Localización:</strong> {{ character.location.name }}</p>
+          <p><strong>Especie:</strong> {{ character.species }}</p>
+        </div>
+
+
+        <div>
+          <p> <strong>Estado:</strong> {{ character.status }}</p>
+          <p><strong>Género:</strong> {{ character.gender }}</p>
+          <p><strong>Origen:</strong> {{ character.origin.name }}</p>
+
+        </div>
+
+        <div>
+          <p><strong>Episodios:</strong> {{ character.episode.length }}</p>
+          <p><strong>Creado:</strong> {{ character.created }}</p>
+          <p><strong>Tipo:</strong> {{ character.type || 'No encontrado'}}</p>
+        </div>
+      </div>
+
+      <hr class="border-gray-500">
+
+
+      <div class="flex justify-end">
+        <button class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded" mat-button (click)="navigateToList()" type="button">
+          Volver
+        </button>
+      </div>
+    </div>
+  }
+</div>
+
