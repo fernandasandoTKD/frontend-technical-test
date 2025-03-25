@@ -1,7 +1,4 @@
 import { Routes } from '@angular/router';
-import { CharacterListComponent } from './views/character-list/character-list.component';
-import { CharacterDetailComponent } from './views/character-detail/character-detail.component';
-import { CharacterExistsGuard } from './guards/character-exists.guard';
 import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
 import { MapComponent } from './views/map/map.component';
 
@@ -13,16 +10,8 @@ export const routes: Routes = [
   },
   {
     path: 'api-ricky',
-    component: CharacterListComponent,
+    loadChildren: () => import('./modules/character/character.module').then(m => m.CharacterModule),
     data: { title: 'Consumo API Ricky Morty' }
-
-  },
-  {
-    path: 'api-ricky/:id',
-    component:CharacterDetailComponent,
-    canActivate: [CharacterExistsGuard],
-    data: { title: 'Detalle personaje' }
-
   },
   {
     path:'api-maps',
