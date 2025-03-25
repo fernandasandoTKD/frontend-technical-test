@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
   mobile = false;
   menus = [
     {
-      name: 'Ricky',
+      name: 'Ricky Morty',
       link: '/api-ricky'
     },
     {
-      name: 'Google Maps',
-      link: '/api-google'
+      name: 'Api Mapa',
+      link: '/api-maps'
     },
   ];
 

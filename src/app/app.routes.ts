@@ -3,6 +3,7 @@ import { CharacterListComponent } from './views/character-list/character-list.co
 import { CharacterDetailComponent } from './views/character-detail/character-detail.component';
 import { CharacterExistsGuard } from './guards/character-exists.guard';
 import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
+import { MapComponent } from './views/map/map.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,11 @@ export const routes: Routes = [
     canActivate: [CharacterExistsGuard],
     data: { title: 'Detalle personaje' }
 
+  },
+  {
+    path:'api-maps',
+    component:MapComponent,
+    data: { title: 'Consumo API Mapa' }
   },
 
   {
